@@ -7,8 +7,15 @@ class Question extends Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    onChange() {
+    onChange(e) {
+        e.preventDefault();
+        const {setScore, setCurrent, question} = this.props;
 
+        if (e.target.value === question.correct) {
+            setScore(this.props.score + 1);
+        }
+
+        setCurrent(this.props.current + 1);
     }
 
     render() {
@@ -25,7 +32,7 @@ class Question extends Component {
                                     {choice.id}
                                     <input type='radio'
                                         onChange={this.onChange}
-                                        name='question.id'
+                                        name={question.id}
                                         value={choice.id} />
                                     {choice.text}
                                 </li>
